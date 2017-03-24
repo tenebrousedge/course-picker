@@ -53,32 +53,31 @@ $(document).ready(function() {
     return $('<input>', {'class': 'form-check-input', 'type': 'checkbox', 'value': value, 'id' : id});
   };
 
-  var nextQuestion = function() {
-    var current = $('.question:visible');
-    var next = current.next();
-    current.toggle('slide', 'left');
-    next.toggle('slide', 'left');
-  };
+  // var nextQuestion = function() {
+  //   var current = $('.question:visible');
+  //   var next = current.next();
+  //   current.toggle('slide', 'left');
+  //   next.toggle('slide', 'left');
+  // };
 
-  var previousQuestion = function() {
-    var current = $('.question:visible');
-    var prev = current.prev();
-    current.toggle('slide', 'right');
-    prev.toggle('slide', 'right');
-  };
+  // var previousQuestion = function() {
+  //   var current = $('.question:visible');
+  //   var prev = current.prev();
+  //   current.toggle('slide', 'right');
+  //   prev.toggle('slide', 'right');
+  // };
 
   var getAnswersFromForm = function() {
     var results = {'ruby' : 0, 'php' : 0, 'android' : 0};
-    $('form input').each(function(idx, elem) {
-      var val = $(elem).val();
-      results[val] += 1;
+    $('form input:checked').each(function(idx, elem) {
+      results[$(elem).val()] += 1;
     });
     return results;
   };
 
   //expected structure {ruby:int, php: int, android}
   var determineTrack = function(answers) {
-    Object.keys(answers).reduce(function(a, b) {
+    return Object.keys(answers).reduce(function(a, b) {
       return answers[a] > answers[b] ? a : b ;
     });
   };
@@ -88,6 +87,7 @@ $(document).ready(function() {
   };
 
   var showResult = function(result) {
+    $('#result img').hide();
     if (es6Check()) {
       $(`#${result}`).show();
     } else {
@@ -97,17 +97,17 @@ $(document).ready(function() {
   $(questions.reverse()).each(function(idx, q) {
     insertQuestion(q.question, q.options, idx);
   });
-  $('.question').first().show();
-  $('button.nav').click(function() {
-    //there has to be a better way to write this conditional
-    if ($('.question:visible').prop('id') === '5') {
-      $('#submit').show();
-    } else {
-      $('#submit').hide();
-    }
-  });
-  $('button#next').click(nextQuestion);
-  $('button#prev').click(previousQuestion);
+  // $('.question').first().show();
+  // $('button.nav').click(function() {
+  //   //there has to be a better way to write this conditional
+  //   if ($('.question:visible').prop('id') === '5') {
+  //     $('#submit').show();
+  //   } else {
+  //     $('#submit').hide();
+  //   }
+  // });
+  // $('button#next').click(nextQuestion);
+  // $('button#prev').click(previousQuestion);
   $('form').submit(function(e) {
     e.preventDefault();
     showResult(getResult());
