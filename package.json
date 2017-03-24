@@ -1,0 +1,17 @@
+{
+  "name": "epic-track",
+  "version": "1.0.0",
+  "description": "this is a student project for my Intro to Programming Course at Epicodus",
+  "private": true,
+  "homepage": "https://tenebrousedge.github.io/epic-track",
+  "bugs": {
+    "url": "https://github.com/tenebrousedge/epic-track",
+    "email": "tenebrousedge@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/tenebrousedge/repository.git"
+  },
+  "license": "CC0-1.0"
+}
+
