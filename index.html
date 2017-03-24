@@ -5,22 +5,27 @@
     <meta name="viewport" content="width=device-width">
     <link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="css/styles.css" rel="stylesheet" type="text/css">
-    <title></title>
+    <title>Epicodus Track Quiz</title>
   </head>
   <body>
-    <div id="modal"><h1>Track Tracker</h1></div>
     <div class="container-fluid">
       <header class="jumbotron">
         <h1>Which Epicodus Course Is Right For You?</h1>
       </header>
+      <div class="row nav">
+      <button id="prev" class="btn btn-info">Previous</button>
+      <button id="next" class="btn btn-success">Next</button>
+      </div>
       <div class="container">
         <form>
-        <div class="question">
-        </form>
-        <div id="result"></div>
-        <img src="PHP-logo.svg" onerror="this.src='PHP-logo.png'">
-        <img src="Android_robot" onerror="this.src='PHP-logo.png'">
-        <img src="Ruby_logo.svg" onerror="this.src='Ruby_logo.png'">
+        <button id="submit" type="submit" class="btn btn-default">Submit</button>
+       </form>
+        <div id="result">
+          <!--one weird trick for svg fallback. web developers HATE this! -->
+          <img id="php" src="img/PHP-logo.svg" onerror="this.src='img/PHP-logo.png'">
+          <img id="android" src="img/Android_robot" onerror="this.src='img/Android_robot.png'">
+          <img id="ruby" src="img/Ruby_logo.svg" onerror="this.src='img/Ruby_logo.png'">
+        </div>
       </div>
     </div>
     <script src="bower_components/jquery/dist/jquery.js"></script>
