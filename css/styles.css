@@ -1,4 +1,4 @@
-#result img {
+#result img, .question, #submit {
 	display: none;
 }
 

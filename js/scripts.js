@@ -53,19 +53,23 @@ $(document).ready(function() {
     return $('<input>', {'class': 'form-check-input', 'type': 'checkbox', 'value': value, 'id' : id});
   };
 
-  // var nextQuestion = function() {
-  //   var current = $('.question:visible');
-  //   var next = current.next();
-  //   current.toggle('slide', 'left');
-  //   next.toggle('slide', 'left');
-  // };
+  var nextQuestion = function() {
+    var current = $('.question:visible');
+    var next = current.next('.question');
+    if (next) {
+      current.toggle('slide', 'left');
+      next.toggle('slide', 'left');
+    }
+  };
 
-  // var previousQuestion = function() {
-  //   var current = $('.question:visible');
-  //   var prev = current.prev();
-  //   current.toggle('slide', 'right');
-  //   prev.toggle('slide', 'right');
-  // };
+  var previousQuestion = function() {
+    var current = $('.question:visible');
+    var prev = current.prev('.question');
+    if (prev) {
+      current.toggle('slide', 'left');
+      prev.toggle('slide', 'right');
+    }
+  };
 
   var getAnswersFromForm = function() {
     var results = {'ruby' : 0, 'php' : 0, 'android' : 0};
@@ -97,17 +101,17 @@ $(document).ready(function() {
   $(questions.reverse()).each(function(idx, q) {
     insertQuestion(q.question, q.options, idx);
   });
-  // $('.question').first().show();
-  // $('button.nav').click(function() {
-  //   //there has to be a better way to write this conditional
-  //   if ($('.question:visible').prop('id') === '5') {
-  //     $('#submit').show();
-  //   } else {
-  //     $('#submit').hide();
-  //   }
-  // });
-  // $('button#next').click(nextQuestion);
-  // $('button#prev').click(previousQuestion);
+  $('.question').first().show();
+  $('button.nav').click(function() {
+    //there has to be a better way to write this conditional
+    if ($('.question:visible').prop('id') === 'q0') {
+      $('#submit').show();
+    } else {
+      $('#submit').hide();
+    }
+  });
+  $('button#next').click(nextQuestion);
+  $('button#prev').click(previousQuestion);
   $('form').submit(function(e) {
     e.preventDefault();
     showResult(getResult());
