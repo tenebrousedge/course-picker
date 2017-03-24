@@ -32,13 +32,13 @@ $(document).ready(function() {
   var insertQuestion = function(question, options, questionnumber) {
     var header = $('<h3>').text(question);
     var questionDiv = generateCheckboxDiv(options, questionnumber);
-    var outerDiv = $('<div>', {'class': 'col-md-6 panel panel-info'}).append(header, questionDiv);
+    var outerDiv = $('<div>', {'class': 'col-md-6 panel panel-info question', 'id': 'q' + questionnumber}).append(header, questionDiv);
     return $('form').prepend(outerDiv);
   };
   //expects string, [{option:option,value:value}, {...}]
   var generateCheckboxDiv = function(options, questionnumber) {
     //iterate over options to produce input and labels
-    var wrapper = $('<div>', {'id' : 'q' + questionnumber, 'class': 'form-check'});
+    var wrapper = $('<div>', {'class': 'form-check'});
     var inner = $.map(options, function(elem, idx){
       var id = 'q' + questionnumber + '_' + 'a' + idx;
       var label = $('<label>', {'class': 'form-check-label'});
@@ -53,16 +53,18 @@ $(document).ready(function() {
     return $('<input>', {'class': 'form-check-input', 'type': 'checkbox', 'value': value, 'id' : id});
   };
 
-  var slide = function(elem, direction) {
-    elem.hide('slide', {direction: direction}, 300);
-  };
-
   var nextQuestion = function() {
-    slide($('+ .question', this), 'left');
+    var current = $('.question:visible');
+    var next = current.next();
+    current.toggle('slide', 'left');
+    next.toggle('slide', 'left');
   };
 
   var previousQuestion = function() {
-    slide($('+ .question', this), 'left');
+    var current = $('.question:visible');
+    var prev = current.prev();
+    current.toggle('slide', 'right');
+    prev.toggle('slide', 'right');
   };
 
   var getAnswersFromForm = function() {
@@ -95,7 +97,15 @@ $(document).ready(function() {
   $(questions.reverse()).each(function(idx, q) {
     insertQuestion(q.question, q.options, idx);
   });
-  $('#result img').hide();
+  $('.question').first().show();
+  $('button.nav').click(function() {
+    //there has to be a better way to write this conditional
+    if ($('.question:visible').prop('id') === '5') {
+      $('#submit').show();
+    } else {
+      $('#submit').hide();
+    }
+  });
   $('button#next').click(nextQuestion);
   $('button#prev').click(previousQuestion);
   $('form').submit(function(e) {

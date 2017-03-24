@@ -1,6 +1,7 @@
 # Epic Track
+by Kai
 
-Not quite as epic as it sounds.
+Not quite as epic as it sounds. This just asks you questions to try to sort you into a category.
 
 ## Installation
 
