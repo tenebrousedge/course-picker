@@ -56,7 +56,7 @@ $(document).ready(function() {
   var nextQuestion = function() {
     var current = $('.question:visible');
     var next = current.next('.question');
-    if (next) {
+    if (next.length > 0) {
       current.toggle('slide', 'left');
       next.toggle('slide', 'left');
     }
@@ -65,7 +65,7 @@ $(document).ready(function() {
   var previousQuestion = function() {
     var current = $('.question:visible');
     var prev = current.prev('.question');
-    if (prev) {
+    if (prev.length > 0) {
       current.toggle('slide', 'left');
       prev.toggle('slide', 'right');
     }
